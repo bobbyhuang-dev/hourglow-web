@@ -416,3 +416,55 @@ html[lang="zh-Hans"] .brand, html[lang="zh-Hans"] .facts strong { letter-spacing
   .desk .wall { transition: none; }
   .btn { transition: none; }
 }
+
+/* 404: the page has set. A night desk, then the way home. */
+
+.page-lost main { min-height: calc(100vh - 64px - 88px); }
+
+.lost .desk { min-height: 560px; }
+
+.lost .desk::after {
+  background: linear-gradient(to top, rgba(8, 10, 20, 0.85) 0%, rgba(8, 10, 20, 0.45) 50%, rgba(8, 10, 20, 0.05) 85%);
+}
+
+.lost-copy { bottom: 64px; max-width: 600px; }
+
+.lost-code {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #f5b877;
+}
+
+.lost-path { font-size: 14px; color: rgba(255, 255, 255, 0.65); text-shadow: none; }
+.lost-path code {
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(20, 22, 34, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  word-break: break-all;
+}
+
+.btn-ghost {
+  color: #fff;
+  background: rgba(20, 22, 34, 0.4);
+  border-color: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+.btn-ghost:hover { background: rgba(20, 22, 34, 0.6); border-color: rgba(255, 255, 255, 0.35); }
+
+@media (max-width: 900px) {
+  .lost .desk { height: auto; min-height: 560px; }
+  .lost-copy { bottom: 48px; }
+}
+
+@media (max-width: 600px) {
+  .page-lost main { min-height: 0; }
+  .lost .desk { min-height: 0; height: calc(100vh - 64px); }
+  .lost-copy .hero-actions { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .lost-copy .btn { justify-content: center; }
+}

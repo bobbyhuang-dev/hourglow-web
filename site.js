@@ -58,7 +58,13 @@
       footerLinks: "Project links",
       footerSource: "Source",
       footerReleases: "Releases",
-      footerContributing: "Contributing"
+      footerContributing: "Contributing",
+      lostLabel: "Page not found",
+      lostCode: "404 · Not found",
+      lostTitle: "This page <em>has set.</em>",
+      lostBody: "Whatever lived at this address has dropped below the horizon. The home page is still up.",
+      lostHome: "Back to the home page",
+      lostReport: "Report a broken link"
     },
     'zh-Hans': {
       metaDescription: "HourGlow 按照太阳的节奏，在预定时间切换你的 macOS 壁纸。免费、开源，常驻菜单栏。",
@@ -116,7 +122,13 @@
       footerLinks: "项目链接",
       footerSource: "源码",
       footerReleases: "发布版本",
-      footerContributing: "参与贡献"
+      footerContributing: "参与贡献",
+      lostLabel: "页面未找到",
+      lostCode: "404 · 页面未找到",
+      lostTitle: "这个页面<em>已经落下了</em>。",
+      lostBody: "这个地址上的内容已经沉到地平线以下。首页还亮着。",
+      lostHome: "回到首页",
+      lostReport: "报告失效链接"
     }
   };
 
@@ -205,6 +217,9 @@
   }
 
   applyLang(currentLang());
+
+  var lostPath = document.getElementById('lost-path');
+  if (lostPath) lostPath.textContent = location.pathname + location.search;
 
   // Hero: a desktop that lives through one day.
   var walls = document.querySelectorAll('.wall');
