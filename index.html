@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HourGlow</title>
+  <meta name="description" content="HourGlow switches your macOS wallpaper on a schedule that follows the sun. Free, open source, lives in the menu bar." data-i18n-content="metaDescription">
+  <meta property="og:title" content="HourGlow">
+  <meta property="og:description" content="Your wallpaper, on the sun's schedule." data-i18n-content="ogDescription">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/favicon-64.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/icon-512.png">
+  <link rel="preload" as="image" href="assets/tahoe-morning.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Runs before first paint so a stored theme or language never flashes the default.
+    (function () {
+      var root = document.documentElement;
+      var theme = null, lang = null;
+      try { theme = localStorage.getItem('hourglow.theme'); lang = localStorage.getItem('hourglow.lang'); } catch (e) {}
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      if (lang !== 'en' && lang !== 'zh-Hans') {
+        lang = /^zh/i.test(navigator.language || '') ? 'zh-Hans' : 'en';
+      }
+      root.setAttribute('data-theme', theme);
+      root.setAttribute('lang', lang);
+    })();
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="HourGlow home" data-i18n-aria="brandHome">
+      <img src="assets/icon-512.png" alt="" width="32" height="32">
+      HourGlow
+    </a>
+    <nav class="nav" aria-label="Sections" data-i18n-aria="navSections">
+      <a class="hide-narrow" href="#panel" data-i18n="navPanel">Panel</a>
+      <a class="hide-narrow" href="#install" data-i18n="navInstall">Install</a>
+      <a href="https://github.com/bobbyhuang-dev/hourglow">GitHub</a>
+      <div class="controls">
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch to dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4m11.4-11.4 1.4-1.4"/></svg>
+        </button>
+        <button class="lang-btn" id="lang-toggle" type="button" aria-label="切换到中文" lang="zh-Hans">中文</button>
+      </div>
+      <a class="btn btn-primary btn-small" href="https://github.com/bobbyhuang-dev/hourglow/releases/latest" data-i18n="navDownload">Download</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero" aria-label="A day on a Mac running HourGlow" data-i18n-aria="heroLabel">
+    <div class="desk">
+      <img class="wall is-active" src="assets/tahoe-morning.jpg" alt="Lake Tahoe at sunrise" data-i18n-alt="wallMorning" width="1800" height="1012">
+      <img class="wall" src="assets/tahoe-day.jpg" alt="Lake Tahoe in daylight" data-i18n-alt="wallDay" width="1800" height="1012" loading="lazy">
+      <img class="wall" src="assets/tahoe-evening.jpg" alt="Lake Tahoe at dusk" data-i18n-alt="wallEvening" width="1800" height="1012" loading="lazy">
+      <img class="wall" src="assets/tahoe-night.jpg" alt="Lake Tahoe at night under stars" data-i18n-alt="wallNight" width="1800" height="1012" loading="lazy">
+
+      <div class="menubar" aria-hidden="true">
+        <span class="menubar-apple"></span>
+        <span class="menubar-app" data-i18n="finder">Finder</span>
+        <span class="menubar-right">
+          <img src="assets/icon-512.png" alt="" width="16" height="16">
+          <span class="menubar-clock" id="clock"><span class="menubar-date">Wed 3 Sep</span><span class="menubar-time">06:04</span></span>
+        </span>
+      </div>
+
+      <div class="hero-copy">
+        <h1 data-i18n-html="heroTitle">Your wallpaper,<br>on <em>the sun's</em> schedule.</h1>
+        <p data-i18n="heroBody">macOS Tahoe has a wallpaper for every part of the day, and no way to switch them. HourGlow does it for you.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://github.com/bobbyhuang-dev/hourglow/releases/latest">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 5-5m-5 5-5-5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+            <span data-i18n="heroDownload">Download for macOS 26</span>
+          </a>
+          <span class="hero-note" data-i18n="heroNote">Free · Open source · 5 MB · Easy on the battery</span>
+        </div>
+      </div>
+
+      <ol class="slots" aria-label="Today's schedule" data-i18n-aria="slotsLabel">
+        <li class="is-active"><span class="slot-time">06:04</span><span class="slot-name" data-i18n="slotMorning">Morning</span><span class="slot-rule" data-i18n="ruleMorning">sunrise</span></li>
+        <li><span class="slot-time">08:04</span><span class="slot-name" data-i18n="slotDay">Day</span><span class="slot-rule" data-i18n="ruleDay">sunrise +2 h</span></li>
+        <li><span class="slot-time">18:06</span><span class="slot-name" data-i18n="slotEvening">Evening</span><span class="slot-rule" data-i18n="ruleEvening">sunset −30 min</span></li>
+        <li><span class="slot-time">19:36</span><span class="slot-name" data-i18n="slotNight">Night</span><span class="slot-rule" data-i18n="ruleNight">sunset +1 h</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="panel">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 data-i18n="panelTitle">One panel in the menu bar. No Dock icon, no window.</h2>
+      </div>
+      <div class="screens">
+        <figure>
+          <div class="panel-frame"><img src="assets/panel-timeline.png" alt="The timeline: today's slots with their resolved times." data-i18n-alt="shotTimelineAlt" width="720" height="782" loading="lazy"></div>
+          <figcaption data-i18n="shotTimeline">Today at a glance. Add as many slots as you like.</figcaption>
+        </figure>
+        <figure>
+          <div class="panel-frame"><img src="assets/panel-slot.png" alt="A slot editor with Clock, Sunrise and Sunset triggers." data-i18n-alt="shotSlotAlt" width="720" height="842" loading="lazy"></div>
+          <figcaption data-i18n="shotSlot">A fixed time, or sunrise and sunset with an offset.</figcaption>
+        </figure>
+        <figure>
+          <div class="panel-frame"><img src="assets/panel-picker.png" alt="The wallpaper picker showing system aerials." data-i18n-alt="shotPickerAlt" width="720" height="934" loading="lazy"></div>
+          <figcaption data-i18n="shotPicker">All 156 system aerials, or any image on disk.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="why">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 data-i18n-html="whyTitle">Set it once. <em>Forget it.</em></h2>
+      </div>
+      <ul class="facts">
+        <li><strong data-i18n="fact1Title">Follows the seasons</strong><span data-i18n="fact1Body">Sun times are computed on your Mac. No network, no account.</span></li>
+        <li><strong data-i18n="fact2Title">Light on the battery</strong><span data-i18n="fact2Body">No polling, no background loop. It wakes once at the next switch, then sleeps.</span></li>
+        <li><strong data-i18n="fact3Title">Won't fight you</strong><span data-i18n="fact3Body">Pick a wallpaper yourself and it stays until the next switch.</span></li>
+        <li><strong data-i18n="fact4Title">24-hour wallpaper sets</strong><span data-i18n="fact4Body">Drop in a folder of stills. They spread across the day by sun time.</span></li>
+        <li><strong data-i18n="fact5Title">Nothing until you press Apply</strong><span data-i18n="fact5Body">Edits are a draft. Try things freely.</span></li>
+        <li><strong data-i18n="fact6Title">Tiny</strong><span data-i18n="fact6Body">Under 5 MB, zero third-party code, and it catches up after sleep.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="install">
+    <div class="wrap">
+      <div class="install-grid">
+        <div class="section-head">
+          <h2 data-i18n="installTitle">Install in a minute.</h2>
+          <p class="lead" data-i18n="installLead">Not notarized, so macOS asks once. Then it just runs.</p>
+        </div>
+        <ol class="steps">
+          <li><div><strong data-i18n="step1">Download, unzip, drag to Applications.</strong></div></li>
+          <li>
+            <div>
+              <strong data-i18n="step2">Let it through once.</strong>
+              <pre><code><span class="p">$ </span>xattr -dr com.apple.quarantine /Applications/HourGlow.app</code></pre>
+            </div>
+          </li>
+          <li><div><strong data-i18n="step3">Open it.</strong><p data-i18n="step3Body">The Tahoe schedule is already set up.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="cli">
+    <div class="wrap">
+      <div class="cli-grid">
+        <div class="section-head">
+          <h2 data-i18n="cliTitle">Also a command line.</h2>
+          <p class="lead" data-i18n="cliLead">Same engine, headless.</p>
+        </div>
+        <pre><code><span class="p">$ </span>hourglow-cli now
+<span class="p">$ </span>hourglow-cli simulate 2026-12-21
+<span class="p">$ </span>hourglow-cli import ~/Pictures/zhangjiajie
+<span class="p">$ </span>hourglow-cli agent install</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <img src="assets/icon-512.png" alt="" width="72" height="72">
+      <h2 data-i18n-html="ctaTitle">Let the day <em>change</em> your desktop.</h2>
+      <a class="btn btn-primary" href="https://github.com/bobbyhuang-dev/hourglow/releases/latest" data-i18n="ctaDownload">Download HourGlow</a>
+      <p class="muted" data-i18n="ctaNote">macOS 26 Tahoe or later · English and 简体中文</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>HourGlow · Apache 2.0 · © 2026 Bobby Huang</p>
+    <nav aria-label="Project links" data-i18n-aria="footerLinks">
+      <a href="https://github.com/bobbyhuang-dev/hourglow" data-i18n="footerSource">Source</a>
+      <a href="https://github.com/bobbyhuang-dev/hourglow/releases" data-i18n="footerReleases">Releases</a>
+      <a href="https://github.com/bobbyhuang-dev/hourglow/blob/main/CONTRIBUTING.md" data-i18n="footerContributing">Contributing</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "hourglow-web",
+  "compatibility_date": "2026-08-31",
+  "routes": [
+    {
+      "pattern": "hourglow.bobbyhuang.dev",
+      "custom_domain": true
+    }
+  ],
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}
