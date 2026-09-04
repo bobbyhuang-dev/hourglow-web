@@ -55,11 +55,16 @@ It is rendered by the app repo's `Tools/makedemo.sh`, which also produces the RE
 cd ../hourglow && ./build.sh && Tools/makedemo.sh   # writes ../hourglow-web/assets/og.png
 ```
 
-To refresh screenshots after a UI change:
+To refresh screenshots after a UI change (the site swaps light and dark shots with its theme,
+so shoot both; `--now` pins the "next switch" countdown so the pair matches):
 
 ```bash
-cd ../hourglow && ./build.sh && HOURGLOW_LANG=en ./build/panelshot /tmp/shots
-cp /tmp/shots/1-timeline.png ../hourglow-web/assets/panel-timeline.png
-cp /tmp/shots/2-slot.png     ../hourglow-web/assets/panel-slot.png
-cp /tmp/shots/3-picker.png   ../hourglow-web/assets/panel-picker.png
+cd ../hourglow && ./build.sh
+mkdir -p /tmp/shots-light /tmp/shots-dark
+HOURGLOW_LANG=en ./build/panelshot /tmp/shots-light --appearance light --now 2026-09-03T15:55
+HOURGLOW_LANG=en ./build/panelshot /tmp/shots-dark  --appearance dark  --now 2026-09-03T15:55
+for n in 1-timeline:timeline 2-slot:slot 3-picker:picker; do
+  cp /tmp/shots-light/${n%%:*}.png ../hourglow-web/assets/panel-${n##*:}.png
+  cp /tmp/shots-dark/${n%%:*}.png  ../hourglow-web/assets/panel-${n##*:}-dark.png
+done
 ```

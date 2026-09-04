@@ -337,8 +337,13 @@ html[lang="zh-Hans"] .brand, html[lang="zh-Hans"] .facts strong { letter-spacing
   overflow: hidden;
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
-  background: #fff;
+  background: var(--surface);
 }
+
+/* The app is shot in both appearances; show the one matching the site theme. */
+.shot-dark { display: none; }
+:root[data-theme="dark"] .shot-light { display: none; }
+:root[data-theme="dark"] .shot-dark { display: block; }
 
 .facts {
   margin: 0;
@@ -349,7 +354,7 @@ html[lang="zh-Hans"] .brand, html[lang="zh-Hans"] .facts strong { letter-spacing
   gap: 32px 48px;
 }
 
-.facts li { display: grid; gap: 6px; color: var(--muted); padding-top: 16px; border-top: 1px solid var(--border); }
+.facts li { display: grid; gap: 6px; align-content: start; color: var(--muted); padding-top: 16px; border-top: 1px solid var(--border); }
 .facts code { font-size: 0.88em; color: var(--text); background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
 .facts a { color: var(--text); text-underline-offset: 3px; }
 .facts a:hover { color: var(--accent-ink); }
