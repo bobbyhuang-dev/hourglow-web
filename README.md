@@ -47,6 +47,14 @@ visitor's system settings and are remembered in `localStorage` (`hourglow.theme`
 `data-i18n*` attribute whose key maps to both languages in `site.js`. Add new copy in both
 places.
 
+`assets/og.png` is the 1200 × 630 share card used by `og:image`, the Twitter card and the
+GitHub repository's social preview (upload it by hand under the repo's Settings › General).
+It is rendered by the app repo's `Tools/makedemo.sh`, which also produces the README demo GIF:
+
+```bash
+cd ../hourglow && ./build.sh && Tools/makedemo.sh   # writes ../hourglow-web/assets/og.png
+```
+
 To refresh screenshots after a UI change:
 
 ```bash

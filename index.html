@@ -3,13 +3,47 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HourGlow</title>
+  <title data-i18n="metaTitle">HourGlow – macOS wallpaper scheduler that follows the sun</title>
   <meta name="description" content="HourGlow switches your macOS wallpaper on a schedule that follows the sun. Free, open source, lives in the menu bar." data-i18n-content="metaDescription">
-  <meta property="og:title" content="HourGlow">
-  <meta property="og:description" content="Your wallpaper, on the sun's schedule." data-i18n-content="ogDescription">
+  <meta property="og:site_name" content="HourGlow">
+  <meta property="og:title" content="HourGlow – your wallpaper, on the sun's schedule" data-i18n-content="ogTitle">
+  <meta property="og:description" content="A free, open-source menu bar app that switches your macOS wallpaper at sunrise, sunset or any time you choose. Sun times computed on your Mac." data-i18n-content="ogDescription">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://hourglow.bobbyhuang.dev/">
+  <meta property="og:image" content="https://hourglow.bobbyhuang.dev/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="HourGlow's menu bar panel showing today's wallpaper timeline, over Lake Tahoe at dusk." data-i18n-content="ogImageAlt">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HourGlow – your wallpaper, on the sun's schedule" data-i18n-content="ogTitle">
+  <meta name="twitter:description" content="A free, open-source menu bar app that switches your macOS wallpaper at sunrise, sunset or any time you choose. Sun times computed on your Mac." data-i18n-content="ogDescription">
+  <meta name="twitter:image" content="https://hourglow.bobbyhuang.dev/assets/og.png">
+  <meta name="twitter:image:alt" content="HourGlow's menu bar panel showing today's wallpaper timeline, over Lake Tahoe at dusk." data-i18n-content="ogImageAlt">
   <link rel="canonical" href="https://hourglow.bobbyhuang.dev/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "HourGlow",
+    "url": "https://hourglow.bobbyhuang.dev/",
+    "image": "https://hourglow.bobbyhuang.dev/assets/og.png",
+    "screenshot": "https://hourglow.bobbyhuang.dev/assets/panel-timeline.png",
+    "description": "A macOS menu bar app that switches your wallpaper on a schedule that follows the sun: at fixed times, relative to sunrise and sunset, or spread across the day from a 24-hour wallpaper set. Sun times are computed locally.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "macOS 26 or later",
+    "softwareRequirements": "macOS 26 Tahoe",
+    "downloadUrl": "https://github.com/bobbyhuang-dev/hourglow/releases/latest",
+    "installUrl": "https://github.com/bobbyhuang-dev/hourglow/releases/latest",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "license": "https://www.apache.org/licenses/LICENSE-2.0",
+    "inLanguage": ["en", "zh-Hans"],
+    "author": { "@type": "Person", "name": "Bobby Huang", "url": "https://bobbyhuang.dev" },
+    "sameAs": ["https://github.com/bobbyhuang-dev/hourglow"]
+  }
+  </script>
   <link rel="icon" href="assets/favicon-64.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/icon-512.png">
   <link rel="preload" as="image" href="assets/tahoe-morning.jpg">
@@ -45,6 +79,7 @@
     <nav class="nav" aria-label="Sections" data-i18n-aria="navSections">
       <a class="hide-narrow" href="#panel" data-i18n="navPanel">Panel</a>
       <a class="hide-narrow" href="#install" data-i18n="navInstall">Install</a>
+      <a class="hide-narrow" href="#trust" data-i18n="navTrust">Safety</a>
       <a href="https://github.com/bobbyhuang-dev/hourglow">GitHub</a>
       <div class="controls">
         <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch to dark mode">
@@ -131,6 +166,23 @@
         <li><strong data-i18n="fact4Title">24-hour wallpaper sets</strong><span data-i18n="fact4Body">Drop in a folder of stills. They spread across the day by sun time.</span></li>
         <li><strong data-i18n="fact5Title">Nothing until you press Apply</strong><span data-i18n="fact5Body">Edits are a draft. Try things freely.</span></li>
         <li><strong data-i18n="fact6Title">Tiny</strong><span data-i18n="fact6Body">Under 5 MB, zero third-party code, and it catches up after sleep.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="trust">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 data-i18n-html="trustTitle">Nothing hidden. <em>Here is exactly what it does.</em></h2>
+        <p class="lead" data-i18n="trustLead">It changes one file, and you can see every byte it sends.</p>
+      </div>
+      <ul class="facts">
+        <li><strong data-i18n="trust1Title">Edits one file</strong><span data-i18n-html="trust1Body">macOS keeps wallpaper settings in <code>Index.plist</code> under your Application Support folder. HourGlow rewrites the wallpaper entry there and restarts <code>WallpaperAgent</code>. Nothing else on disk changes.</span></li>
+        <li><strong data-i18n="trust2Title">Backs it up first</strong><span data-i18n-html="trust2Body">Every write begins by copying that file to <code>Index.plist.hourglow.bak</code> next to it. No backup, no write. Its own files live in <code>~/Library/Application Support/HourGlow</code>.</span></li>
+        <li><strong data-i18n="trust3Title">Needs no permissions</strong><span data-i18n="trust3Body">Location is optional, asked once, stored as a plain latitude and longitude; pick a city instead if you'd rather not. Launch at login is a normal login item you can switch off in System Settings.</span></li>
+        <li><strong data-i18n="trust4Title">Sun times stay on your Mac</strong><span data-i18n="trust4Body">The NOAA solar position algorithm runs locally. No sun service, no account, no telemetry.</span></li>
+        <li><strong data-i18n="trust5Title">Talks to GitHub once a day</strong><span data-i18n="trust5Body">Only to check for a new release, and only while automatic updates are on. A download is checked against its hash and code signature before it replaces anything. Searching a place name the built-in city list doesn't know asks Apple's MapKit, then OpenStreetMap.</span></li>
+        <li><strong data-i18n="trust6Title">Open source</strong><span data-i18n-html="trust6Body">Apache 2.0. <a href="https://github.com/bobbyhuang-dev/hourglow">Read the code</a>, build it yourself in one command, or <a href="https://github.com/bobbyhuang-dev/hourglow/blob/main/SECURITY.md">report a problem privately</a>.</span></li>
       </ul>
     </div>
   </section>

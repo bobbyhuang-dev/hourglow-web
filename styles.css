@@ -350,6 +350,9 @@ html[lang="zh-Hans"] .brand, html[lang="zh-Hans"] .facts strong { letter-spacing
 }
 
 .facts li { display: grid; gap: 6px; color: var(--muted); padding-top: 16px; border-top: 1px solid var(--border); }
+.facts code { font-size: 0.88em; color: var(--text); background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
+.facts a { color: var(--text); text-underline-offset: 3px; }
+.facts a:hover { color: var(--accent-ink); }
 .facts strong { color: var(--text); font-family: var(--font-body); font-weight: 600; font-size: 18px; letter-spacing: -0.01em; }
 
 .install-grid, .cli-grid {
