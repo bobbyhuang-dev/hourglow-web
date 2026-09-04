@@ -1,7 +1,7 @@
 # hourglow-web
 
 Promotion site for [HourGlow](https://github.com/bobbyhuang-dev/hourglow), a macOS wallpaper
-scheduler that follows the daylight.
+scheduler: system aerials or your own images, switched by time, sunrise and sunset.
 
 Static HTML, CSS and one browser script, with no runtime dependencies. `assets/` holds the app icon (from
 `Resources/HourGlow.icns`) and panel screenshots rendered with `./build/panelshot` in the app repo.
