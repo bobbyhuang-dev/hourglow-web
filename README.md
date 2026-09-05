@@ -56,15 +56,21 @@ cd ../hourglow && ./build.sh && Tools/makedemo.sh   # writes ../hourglow-web/ass
 ```
 
 To refresh screenshots after a UI change (the site swaps light and dark shots with its theme,
-so shoot both; `--now` pins the "next switch" countdown so the pair matches):
+so shoot both; `--now` pins the "next switch" countdown so the pair matches). Point
+`HOURGLOW_HOME` at a throwaway directory: with the real config, the running app holds the
+scheduler lock and the panel shows a "background daemon is scheduling" notice, plus whatever
+city you actually live in.
 
 ```bash
 cd ../hourglow && ./build.sh
-mkdir -p /tmp/shots-light /tmp/shots-dark
-HOURGLOW_LANG=en ./build/panelshot /tmp/shots-light --appearance light --now 2026-09-03T15:55
-HOURGLOW_LANG=en ./build/panelshot /tmp/shots-dark  --appearance dark  --now 2026-09-03T15:55
+export HOURGLOW_HOME=/tmp/hg-shots HOURGLOW_LANG=en
+rm -rf "$HOURGLOW_HOME" /tmp/shots-light /tmp/shots-dark; mkdir -p /tmp/shots-light /tmp/shots-dark
+./build/hourglow-cli location 22.5431 114.0579 Shenzhen
+./build/panelshot /tmp/shots-light --appearance light --now 2026-09-04T15:55
+./build/panelshot /tmp/shots-dark  --appearance dark  --now 2026-09-04T15:55
 for n in 1-timeline:timeline 2-slot:slot 3-picker:picker; do
   cp /tmp/shots-light/${n%%:*}.png ../hourglow-web/assets/panel-${n##*:}.png
   cp /tmp/shots-dark/${n%%:*}.png  ../hourglow-web/assets/panel-${n##*:}-dark.png
 done
+sips -g pixelHeight ../hourglow-web/assets/panel-*.png   # the <img> tags in index.html hardcode width/height
 ```
