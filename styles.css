@@ -140,6 +140,7 @@ pre .p { color: #eaa059; user-select: none; }
 .site-header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 24px; }
 
 .brand { display: flex; align-items: center; gap: 12px; font-family: var(--font-body); font-weight: 600; font-size: 18px; letter-spacing: -0.01em; text-decoration: none; }
+.brand { flex-shrink: 0; white-space: nowrap; }
 .brand img { width: 32px; height: 32px; border-radius: 8px; }
 
 .nav { display: flex; gap: 24px; align-items: center; font-size: 14px; }
@@ -168,7 +169,7 @@ pre .p { color: #eaa059; user-select: none; }
 .icon-btn { width: 32px; padding: 0; }
 .icon-btn svg { width: 18px; height: 18px; }
 .icon-btn:hover, .lang-btn:hover { color: var(--text); background: var(--surface-2); }
-.lang-btn { font-weight: 500; letter-spacing: 0; }
+.lang-btn { white-space: nowrap; flex-shrink: 0; font-weight: 500; letter-spacing: 0; }
 
 .icon-sun { display: none; }
 :root[data-theme="dark"] .icon-sun { display: block; }
@@ -415,6 +416,14 @@ html[lang="zh-Hans"] .brand, html[lang="zh-Hans"] .facts strong { letter-spacing
 
 @media (max-width: 600px) {
   .wrap { width: calc(100% - 32px); }
+  .site-header .wrap { gap: 12px; }
+  .brand { gap: 8px; font-size: 16px; }
+  .brand img { width: 28px; height: 28px; }
+  .nav { gap: 8px; }
+  .nav > a:not(.btn) { display: none; }
+  .nav .btn-small { padding: 8px 10px; font-size: 13px; }
+  .controls { gap: 0; }
+  .lang-btn { padding-inline: 6px; }
   .hero-copy p { font-size: 17px; }
   .hero-copy { bottom: 180px; }
   .slot-rule { display: none; }
