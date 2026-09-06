@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title data-i18n="metaTitle">HourGlow – any macOS wallpaper, on the sun's schedule</title>
-  <meta name="description" content="A tiny, open-source macOS menu bar app that switches system aerials or your own images by time, sunrise and sunset. Free, native Swift, under 5 MB." data-i18n-content="metaDescription">
+  <meta name="description" content="A tiny, open-source macOS menu bar app that switches system aerials or your own images by time, sunrise and sunset. Free, native Swift, under 10 MB." data-i18n-content="metaDescription">
   <meta property="og:site_name" content="HourGlow">
   <meta property="og:title" content="HourGlow – any wallpaper, on the sun's schedule" data-i18n-content="ogTitle">
   <meta property="og:description" content="A tiny, open-source macOS menu bar app that switches system aerials or your own images by time, sunrise and sunset. Sun times computed on your Mac." data-i18n-content="ogDescription">
@@ -33,7 +33,7 @@
     "description": "A tiny, open-source macOS menu bar app that schedules wallpaper switches: system aerials, a folder of stills or your own images, at fixed times or relative to sunrise and sunset. Any number of slots. Sun times are computed locally, and missed switches are applied after sleep.",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "macOS 26 or later",
-    "softwareRequirements": "macOS 26 Tahoe",
+    "softwareRequirements": "macOS 26 Tahoe; current download requires Apple silicon. Intel builds available from source.",
     "downloadUrl": "https://github.com/bobbyhuang-dev/hourglow/releases/latest",
     "installUrl": "https://github.com/bobbyhuang-dev/hourglow/releases/latest",
     "isAccessibleForFree": true,
@@ -119,7 +119,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 5-5m-5 5-5-5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
             <span data-i18n="heroDownload">Download for macOS 26</span>
           </a>
-          <span class="hero-note" data-i18n="heroNote">Free · Open source · Native Swift · Under 5 MB</span>
+          <span class="hero-note" data-i18n="heroNote">Free · Open source · Native Swift · Under 10 MB</span>
         </div>
       </div>
 
@@ -174,7 +174,7 @@
         <li><strong data-i18n="fact3Title">Sun times computed on your Mac</strong><span data-i18n="fact3Body">The NOAA algorithm runs locally and follows the seasons. No network, no account.</span></li>
         <li><strong data-i18n="fact4Title">Catches up after sleep</strong><span data-i18n="fact4Body">Lid closed through a switch? On wake it applies the wallpaper that should be showing.</span></li>
         <li><strong data-i18n="fact5Title">No polling</strong><span data-i18n="fact5Body">No background loop. It wakes once at the next switch, then sleeps.</span></li>
-        <li><strong data-i18n="fact6Title">Free, open source, native Swift</strong><span data-i18n="fact6Body">Apache 2.0, zero third-party code, under 5 MB.</span></li>
+        <li><strong data-i18n="fact6Title">Free, open source, native Swift</strong><span data-i18n="fact6Body">Apache 2.0, zero third-party code, under 10 MB.</span></li>
       </ul>
     </div>
   </section>
@@ -190,7 +190,7 @@
         <li><strong data-i18n="trust2Title">Backs it up first</strong><span data-i18n-html="trust2Body">Every write begins by copying that file to <code>Index.plist.hourglow.bak</code> next to it. No backup, no write. Its own files live in <code>~/Library/Application Support/HourGlow</code>.</span></li>
         <li><strong data-i18n="trust3Title">Needs no permissions</strong><span data-i18n="trust3Body">Location is optional, asked once, stored as a plain latitude and longitude; pick a city instead if you'd rather not. Launch at login is a normal login item you can switch off in System Settings.</span></li>
         <li><strong data-i18n="trust4Title">Sun times stay on your Mac</strong><span data-i18n="trust4Body">The NOAA solar position algorithm runs locally. No sun service, no account, no telemetry.</span></li>
-        <li><strong data-i18n="trust5Title">Talks to GitHub once a day</strong><span data-i18n="trust5Body">Only to check for a new release, and only while automatic updates are on. A download is checked against its hash and code signature before it replaces anything. Searching a place name the built-in city list doesn't know asks Apple's MapKit, then OpenStreetMap.</span></li>
+        <li><strong data-i18n="trust5Title">Network requests, explained</strong><span data-i18n="trust5Body">Update checks contact GitHub daily while automatic updates are on; installation downloads and verifies the archive. Place searches stay offline when the built-in list has matches, and otherwise query Apple MapKit after a short typing pause. Optional location fixes use macOS Location Services; MapKit also names changed or unnamed coordinates. Automatic location has its own switch. No Nominatim, telemetry, or account.</span></li>
         <li><strong data-i18n="trust6Title">Open source</strong><span data-i18n-html="trust6Body">Apache 2.0. <a href="https://github.com/bobbyhuang-dev/hourglow">Read the code</a>, build it yourself in one command, or <a href="https://github.com/bobbyhuang-dev/hourglow/blob/main/SECURITY.md">report a problem privately</a>.</span></li>
       </ul>
     </div>
@@ -202,6 +202,7 @@
         <div class="section-head">
           <h2 data-i18n="installTitle">Install in a minute.</h2>
           <p class="lead" data-i18n="installLead">Not notarized, so macOS asks once. Then it just runs.</p>
+          <p class="muted" data-i18n="installCompatibility">The current 1.6.0 download is for Apple silicon. Intel support is available from source and will ship in the next release.</p>
         </div>
         <ol class="steps">
           <li><div><strong data-i18n="step1">Download, unzip, drag to Applications.</strong></div></li>
@@ -237,7 +238,7 @@
       <img src="assets/icon-512.png" alt="" width="72" height="72">
       <h2 data-i18n-html="ctaTitle">Let the day <em>change</em> your desktop.</h2>
       <a class="btn btn-primary" href="https://github.com/bobbyhuang-dev/hourglow/releases/latest" data-i18n="ctaDownload">Download HourGlow</a>
-      <p class="muted" data-i18n="ctaNote">macOS 26 Tahoe or later · English and 简体中文</p>
+      <p class="muted" data-i18n="ctaNote">macOS 26+ · Apple silicon download · Intel from source</p>
     </div>
   </section>
 
