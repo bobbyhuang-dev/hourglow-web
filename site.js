@@ -3,6 +3,13 @@
 
   var STRINGS = {
     en: {
+      shotTimelineSrc: "assets/panel-timeline.png",
+      shotTimelineDarkSrc: "assets/panel-timeline-dark.png",
+      shotSlotSrc: "assets/panel-slot.png",
+      shotSlotHeight: "870",
+      shotSlotDarkSrc: "assets/panel-slot-dark.png",
+      shotPickerSrc: "assets/panel-picker.png",
+      shotPickerDarkSrc: "assets/panel-picker-dark.png",
       metaTitle: "HourGlow – any macOS wallpaper, on the sun's schedule",
       metaDescription: "A tiny, open-source macOS menu bar app that switches system aerials or your own images by time, sunrise and sunset. Free, native Swift, under 5 MB.",
       ogTitle: "HourGlow – any wallpaper, on the sun's schedule",
@@ -79,6 +86,13 @@
       lostReport: "Report a broken link"
     },
     'zh-Hans': {
+      shotTimelineSrc: "assets/panel-timeline-zh-Hans.png",
+      shotTimelineDarkSrc: "assets/panel-timeline-dark-zh-Hans.png",
+      shotSlotSrc: "assets/panel-slot-zh-Hans.png",
+      shotSlotHeight: "842",
+      shotSlotDarkSrc: "assets/panel-slot-dark-zh-Hans.png",
+      shotPickerSrc: "assets/panel-picker-zh-Hans.png",
+      shotPickerDarkSrc: "assets/panel-picker-dark-zh-Hans.png",
       metaTitle: "HourGlow – 任何壁纸，跟着太阳走的 macOS 调度器",
       metaDescription: "一款不到 5 MB 的开源 macOS 菜单栏应用，让系统航拍壁纸和本地图片按时间、日出与日落自动切换。免费、原生 Swift。",
       ogTitle: "HourGlow – 任何壁纸，跟着太阳走",
@@ -194,6 +208,8 @@
     for (i = 0; i < nodes.length; i++) {
       nodes[i].innerHTML = t(nodes[i].getAttribute('data-i18n-html'));
     }
+    applyAttr('data-i18n-height', 'height');
+    applyAttr('data-i18n-src', 'src');
     applyAttr('data-i18n-alt', 'alt');
     applyAttr('data-i18n-aria', 'aria-label');
     applyAttr('data-i18n-content', 'content');

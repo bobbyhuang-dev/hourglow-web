@@ -55,22 +55,47 @@ It is rendered by the app repo's `Tools/makedemo.sh`, which also produces the RE
 cd ../hourglow && ./build.sh && Tools/makedemo.sh   # writes ../hourglow-web/assets/og.png
 ```
 
-To refresh screenshots after a UI change (the site swaps light and dark shots with its theme,
-so shoot both; `--now` pins the "next switch" countdown so the pair matches). Point
-`HOURGLOW_HOME` at a throwaway directory: with the real config, the running app holds the
-scheduler lock and the panel shows a "background daemon is scheduling" notice, plus whatever
-city you actually live in.
+Panel images also use `data-i18n-src` keys in `site.js`: English uses `panel-*.png`,
+and Simplified Chinese uses `panel-*-zh-Hans.png`. Keep all three panels available in
+both languages and both themes. Language selection updates the image sources; the
+existing theme styles select the light or dark image.
+
+To refresh screenshots after a UI change, capture both languages and themes. `--now`
+and `TZ` keep the resolved times and countdown consistent. Use a fresh configuration
+for each language to keep the same preset schedule and a matching location name. A disposable
+`HOURGLOW_HOME` also avoids the running app's scheduler lock and personal settings.
 
 ```bash
 cd ../hourglow && ./build.sh
-export HOURGLOW_HOME=/tmp/hg-shots HOURGLOW_LANG=en
-rm -rf "$HOURGLOW_HOME" /tmp/shots-light /tmp/shots-dark; mkdir -p /tmp/shots-light /tmp/shots-dark
-./build/hourglow-cli location 22.5431 114.0579 Shenzhen
-./build/panelshot /tmp/shots-light --appearance light --now 2026-09-04T15:55
-./build/panelshot /tmp/shots-dark  --appearance dark  --now 2026-09-04T15:55
-for n in 1-timeline:timeline 2-slot:slot 3-picker:picker; do
-  cp /tmp/shots-light/${n%%:*}.png ../hourglow-web/assets/panel-${n##*:}.png
-  cp /tmp/shots-dark/${n%%:*}.png  ../hourglow-web/assets/panel-${n##*:}-dark.png
+bash <<'SH'
+set -euo pipefail
+work=$(mktemp -d)
+trap 'rm -rf "$work"' EXIT
+export TZ=Asia/Shanghai
+for lang in en zh-Hans; do
+  export HOURGLOW_HOME="$work/$lang/home" HOURGLOW_LANG="$lang"
+  locale_suffix=
+  city=Shenzhen
+  if [ "$lang" = zh-Hans ]; then locale_suffix=-zh-Hans; city=深圳; fi
+  ./build/hourglow-cli location 22.5431 114.0579 "$city"
+  for appearance in light dark; do
+    shots="$work/$lang/$appearance"
+    mkdir -p "$shots"
+    for page in timeline slot picker; do
+      ./build/panelshot "$shots" --only "$page" --appearance "$appearance" --now 2026-09-04T15:55
+    done
+    theme_suffix=
+    if [ "$appearance" = dark ]; then theme_suffix=-dark; fi
+    for shot in 1-timeline:timeline 2-slot:slot 3-picker:picker; do
+      cp "$shots/${shot%%:*}.png" "../hourglow-web/assets/panel-${shot##*:}${theme_suffix}${locale_suffix}.png"
+    done
+  done
 done
-sips -g pixelHeight ../hourglow-web/assets/panel-*.png   # the <img> tags in index.html hardcode width/height
+sips -g pixelHeight ../hourglow-web/assets/panel-*.png
+SH
 ```
+
+The `<img>` dimensions must match the generated assets. The slot editor is shorter
+in Chinese, so its height also uses a `data-i18n-height` key in `site.js`. Verify
+language switching in light and dark mode, including a reload with a saved language
+and a first visit from a Chinese browser locale.
