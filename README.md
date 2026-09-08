@@ -5,6 +5,9 @@ scheduler: system aerials or your own images, switched by time, sunrise and suns
 
 Static HTML, CSS and one browser script, with no runtime dependencies. `assets/` holds the app icon (from
 `Resources/HourGlow.icns`) and panel screenshots rendered with `./build/panelshot` in the app repo.
+`src/worker.js` serves one route, `/download`, which looks up the latest GitHub release and
+redirects to its `HourGlow-*.zip` asset (falling back to the releases page). Every other path is
+served from `dist/`.
 
 ```bash
 open index.html                 # preview without installing tools
